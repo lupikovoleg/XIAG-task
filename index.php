@@ -1,7 +1,6 @@
 <?php
 define('IN_SYSTEM', true);
 
-
 /* PLEASE CHANGE ALL THESE VARIABLES TO THE ACTUAL DATA */
 $config = array(
   'db' => array(
@@ -21,8 +20,8 @@ require_once('classes/db.php');
 $Db = new Db;
 $Db->dbConnect();
 
-$get = trim($_SERVER['REQUEST_METHOD'] === 'GET');
-$getPage = explode('/', $get);
+$get      = trim($_SERVER['REQUEST_METHOD'] === 'GET');
+$getPage  = explode('/', $get);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   function generate_name($number) {
@@ -55,8 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $url = htmlspecialchars(file_get_contents('php://input'));
       if($url) {
         if(!preg_match('@^(?:http://)@i', $url))
-        $url = 'http://'.$url;
-
+          $url = 'http://'.$url;
+        
         $url = explode('//', $url);
         $url = $url[1];
       } else {
@@ -98,51 +97,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if ($_SERVER['REQUEST_METHOD'] === 'GET')
 {
   if($_SERVER['QUERY_STRING']) {
-    $url = explode('=', $_SERVER['QUERY_STRING'])[1];
-
-    $check = $Db->dbQuery('id, link, alias', 'link', 'alias = "'.$url.'"');
-    $check = $Db->dbAssoc($check, true);
+    $url    = explode('=', $_SERVER['QUERY_STRING'])[1];
+    $check  = $Db->dbQuery('id, link, alias', 'link', 'alias = "'.$url.'"');
+    $check  = $Db->dbAssoc($check, true);
+    
     if($check) {
       $Db->dbUpdate('link', 'clicks = clicks + 1', 'id = '.$check['id'].'');
       header("Location: http://{$check['link']}");
     }
   }
-  ?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <link href="http://www.xiag.ch/files/css/testtask-styles.css?data=26.07.2012" rel="stylesheet">
-    <script src="js/init.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/controller.js"></script>
-    <title>XIAG test task</title>
-  </head>
-  <body>
-    <div class="content">
-      <header>URL shortener</header>
-      <form>
-        <table>
-          <tbody>
-            <tr>
-              <th>Long URL</th>
-              <th>Short URL</th>
-            </tr>
-          <tr>
-            <td>
-              <input type="url" name="url">
-              <input type="submit" value="Do!">
-            </td>
-            <td id="result">
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </form>
-    </div>
-  </body>
-</html>
-<?
+  
+  require_once('static/template.html');
 }
 ?>
