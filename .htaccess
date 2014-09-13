@@ -1,0 +1,9 @@
+DirectoryIndex index.php
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+Options +FollowSymlinks -Indexes
+RewriteBase /
+
+RewriteRule ^(.*)$ /index.php?get=$1&%{QUERY_STRING}
