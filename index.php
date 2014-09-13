@@ -114,7 +114,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <link href="http://www.xiag.ch/files/css/testtask-styles.css?data=26.07.2012" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/controller.js"></script>
