@@ -8,7 +8,7 @@ $config = array(
     'host' => 'localhost',
     'name' => 'xiag',
     'user' => 'root',
-    'password' => 'hEY69INAN',
+    'password' => 'password',
     'charset' => 'utf8'
   ),
   'main' => array(
