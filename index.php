@@ -7,18 +7,18 @@ $config = array(
     'host' => 'localhost',
     'name' => 'xiag',
     'user' => 'root',
-    'password' => 'password',
+    'password' => 'hEY69INAN',
     'charset' => 'utf8'
   ),
   'main' => array(
-    'domain' => 'xiag.dev:8888'
+    'domain' => 'xiag.dev:8888' // only domain name, e.g shorturl.com
   )
 );
 
 require_once('classes/db.php');
 
-$Db = new Db;
-$Db->dbConnect();
+$db = new Database;
+$db->connect();
 
 $get      = trim($_SERVER['REQUEST_METHOD'] === 'GET');
 $getPage  = explode('/', $get);
@@ -69,18 +69,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
       }
       
-      $check = $Db->dbQuery('id, link, alias', 'link', 'link = "'.$url.'" OR alias = "'.$url.'"');
-      $check = $Db->dbAssoc($check, true);
+      $check = $db->dbQuery('id, link, alias', 'link', 'link = "'.$url.'" OR alias = "'.$url.'"');
+      $check = $db->dbAssoc($check, true);
       if($check) {
         $return = array(
           "status" => "ok",
           "message" => "http://".$check['link']." already exists in database",
-          "shorturl" => "http://".$check['alias']
+          "shorturl" => "http://".$config['main']['domain']."/".$check['alias']
         );
         
         echo json_encode($return);
       } else {
-        $Db->dbInsert('link', 'link, alias', '"'.$url.'", "'.$shorturl.'"');
+        $db->dbInsert('link', 'link, alias', '"'.$url.'", "'.$shorturl.'"');
         
         $return = array(
           "status" => "ok",
@@ -98,11 +98,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
 {
   if($_SERVER['QUERY_STRING']) {
     $url    = explode('=', $_SERVER['QUERY_STRING'])[1];
-    $check  = $Db->dbQuery('id, link, alias', 'link', 'alias = "'.$url.'"');
-    $check  = $Db->dbAssoc($check, true);
+    $check  = $db->dbQuery('id, link, alias', 'link', 'alias = "'.$url.'"');
+    $check  = $db->dbAssoc($check, true);
     
     if($check) {
-      $Db->dbUpdate('link', 'clicks = clicks + 1', 'id = '.$check['id'].'');
+      $db->dbUpdate('link', 'clicks = clicks + 1', 'id = '.$check['id'].'');
       header("Location: http://{$check['link']}");
     }
   }
