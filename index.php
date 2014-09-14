@@ -1,21 +1,8 @@
 <?php
 define('IN_SYSTEM', true);
 
-/* PLEASE CHANGE ALL THESE VARIABLES TO THE ACTUAL DATA */
-$config = array(
-  'db' => array(
-    'host' => 'localhost',
-    'name' => 'xiag',
-    'user' => 'root',
-    'password' => 'hEY69INAN',
-    'charset' => 'utf8'
-  ),
-  'main' => array(
-    'domain' => 'xiag.dev:8888' // only the domain name, e.g shorturl.com
-  )
-);
-
-require_once('classes/db.php');
+require_once('system/config.php');
+require_once('system/db.php');
 
 $db = new Database;
 $db->connect();
@@ -109,4 +96,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
   
   require_once('static/template.html');
 }
-?>

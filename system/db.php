@@ -1,6 +1,6 @@
 <?php
 if(!defined("IN_SYSTEM"))
-die('Direct Access Denied!');
+  die('Direct Access Denied!');
 
 class Database {
   public function connect() {
@@ -110,4 +110,3 @@ class Database {
     return($a[0]);
   }
 }
-?>
