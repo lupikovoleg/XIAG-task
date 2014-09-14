@@ -1,10 +1,10 @@
 var app = app || {};
 
 app.mainCtrl = function() {
-  var proto = {},
+  var pub = {},
       watchForm = {};
   
-  proto.init = function() {
+  pub.init = function() {
     console.log("Hello! XIAG test task ultra super core system are loaded! :P");
     
     watchForm.init();
@@ -47,5 +47,5 @@ app.mainCtrl = function() {
     }
   };
   
-  return proto;
+  return pub;
 }();
