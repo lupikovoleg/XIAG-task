@@ -22,16 +22,17 @@ app.mainCtrl = function() {
 
   watchForm.proccessForm = function() {
     var data = document.querySelector("[name='url']").value,
-        xhr = app.Utils.ajax("POST", "/index.php?get=url&method=add");
+        xhr = app.Utils.ajax("POST", "/index.php?get=url&method=add"),
+        result = document.getElementById("result");
     
     if (xhr) {
       xhr.onload = function() {
         var response = JSON.parse(xhr.responseText);
         
         if (response.status === "ok") {
-          document.getElementById("result").innerHTML = response.shorturl;
+          result.innerHTML = response.shorturl;
         } else {
-          document.getElementById("result").innerHTML = "Empty URL";
+          result.innerHTML = "Empty URL";
         }
       };
       
@@ -39,10 +40,10 @@ app.mainCtrl = function() {
         if (app.Utils.checkUrl(data)) {
           xhr.send(app.Utils.escapeHtml(data));
         } else {
-          document.getElementById("result").innerHTML = "It isn't a valid URL!";
+          result.innerHTML = "It isn't a valid URL!";
         }
       } else {
-        document.getElementById("result").innerHTML = "Empty URL";
+        result.innerHTML = "Empty URL";
       }
     }
   };
