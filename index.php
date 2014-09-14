@@ -11,7 +11,7 @@ $config = array(
     'charset' => 'utf8'
   ),
   'main' => array(
-    'domain' => 'xiag.dev:8888' // only domain name, e.g shorturl.com
+    'domain' => 'xiag.dev:8888' // only the domain name, e.g shorturl.com
   )
 );
 
