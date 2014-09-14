@@ -13,7 +13,6 @@ app.Utils = function() {
       xhr.open(method, url);
     } else {
       xhr = null;
-      console.log();
     }
 
     return xhr;
