@@ -8,10 +8,10 @@ $config = array(
     'host' => 'localhost',
     'name' => 'xiag',
     'user' => 'root',
-    'password' => 'hEY69INAN',
+    'password' => '',
     'charset' => 'utf8'
   ),
   'main' => array(
-    'domain' => 'xiag.dev:8888' // only the domain name, e.g shorturl.com
+    'domain' => 'xiag.dev' // only the domain name, e.g shorturl.com
   )
 );
