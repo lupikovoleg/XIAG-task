@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $return = array(
           "status" => "ok",
-          "message" => "http://'.$url.' added to database",
+          "message" => "http://".$url." added to database",
           "shorturl" => "http://".$config['main']['domain']."/".$shorturl
         );
 
